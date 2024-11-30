@@ -18,6 +18,21 @@ const Main = () => {
             <img src='/rocketdab.png' alt='rocketdab' className='w-1/2' />
         </section>
         <hr className='mx-auto bg-black dark:bg-white w-1/2' />
+        <section id='rockets' className='p-6 my-12'>
+            <h2 className='text-4xl font-bold text-center sm:text-5xl mb-6 text-slate-900 dark:text-white'>
+                Our rockets
+            </h2>
+        </section>
+        <section id='testimonials' className='p-6 my-12'>
+            <h2 className='text-4xl font-bold text-center sm:text-5xl mb-6 text-slate-900 dark:text-white'>
+                Testimonials
+            </h2>
+        </section>
+        <section id='contact' className='p-6 my-12'>
+            <h2 className='text-4xl font-bold text-center sm:text-5xl mb-6 text-slate-900 dark:text-white'>
+                Contact
+            </h2>
+        </section>
     </main>
   )
 }
