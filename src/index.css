@@ -5,3 +5,41 @@
 .radial-blue{
     background: radial-gradient(lightyellow, skyblue);
 }
+
+.custom-quote::before {
+    content: "\201C";  
+}
+
+.custom-quote-font::before {
+    font-family: serif;
+    font-size: 5.5rem;
+    color: white;
+    opacity: 0.25;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0.5rem) translateY(0.5rem);
+}
+
+.custom-quote-position::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.custom-quote_::after {
+    content: "\201D";  
+}
+
+.custom-quote-font_::after {
+    font-family: serif;
+    font-size: 5.5rem;
+    color: white;
+    opacity: 0.25;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(0.5rem) translateY(0.5rem);
+}
+
+.custom-quote-position_::after {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
