@@ -2,6 +2,7 @@ import React from 'react'
 import Rockets from './Rockets'
 import CounterUI from './CounterUI'
 import PostList from './PostList'
+import AddPostForm from './AddPostForm'
 
 const Main = () => {
   return (
@@ -48,6 +49,7 @@ const Main = () => {
                 Contact
             </h2>
         </section>
+        <AddPostForm/>
         <PostList/> 
     </main>
   )

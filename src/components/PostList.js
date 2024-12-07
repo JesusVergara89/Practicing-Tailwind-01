@@ -6,7 +6,7 @@ const PostList = () => {
   const post = useSelector(selectAllPost);
 
   const renderedPosts = post.map((post) => (
-    <div className="border p-2 rounded-md flex flex-col hover:bg-slate-700 hover:cursor-pointer" key={post.id}>
+    <div className="w-2/3  border p-2 rounded-md flex flex-col hover:bg-slate-700 hover:cursor-pointer" key={post.id}>
       <h3 className="text-slate-400 text-xl font-bold">{post.title}</h3>
       <p className="text-slate-400 text-sm">{post.body.substring(0, 100)}</p>
     </div>
