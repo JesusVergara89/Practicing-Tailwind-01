@@ -9,9 +9,9 @@ const CounterUI = () => {
   return (
     <section className="flex flex-col items-center justify-center mb-16">
       <p>{count}</p>
-      <div className="flex justify-center gap-5 border p-3 mt-2">
-        <button className="border px-2 bg-slate-800 hover:bg-slate-700" onClick={() => dispatch(decrement())}>-</button>
-        <button className="border px-2 bg-slate-800 hover:bg-slate-700" onClick={incrementCounter}>+</button>
+      <div className="flex justify-center gap-5 border p-3 mt-2 rounded-2xl">
+        <button className="border px-2 bg-slate-800 hover:bg-slate-700 rounded-md" onClick={() => dispatch(decrement())}>-</button>
+        <button className="border px-2 bg-slate-800 hover:bg-slate-700 rounded-md" onClick={incrementCounter}>+</button>
       </div>
     </section>
   );
