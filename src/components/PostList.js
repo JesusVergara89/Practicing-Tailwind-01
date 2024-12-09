@@ -2,6 +2,8 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectAllPost } from "../store/slices/postSlice";
 import AuthorPost from "./AuthorPost";
+import TimeAgo from "./TimeAgo";
+
 
 const PostList = () => {
   const post = useSelector(selectAllPost);
@@ -14,11 +16,12 @@ const PostList = () => {
       <h3 className="text-slate-400 text-xl font-bold">{post.title}</h3>
       <p className="text-slate-400 text-sm">{post.body.substring(0, 100)}</p>
       <AuthorPost userId={post.userId} />
+      <TimeAgo timestamp={post.date} />
     </div>
   ));
 
   return (
-    <section className="flex flex-col items-center justify-center mb-16 gap-4">
+    <section className="flex flex-col-reverse items-center justify-center mb-16 gap-4">
       <h2 className="text-slate-400 text-2xl font-bold">Posts</h2>
       {renderedPosts}
     </section>

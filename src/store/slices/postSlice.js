@@ -1,4 +1,5 @@
 import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { sub } from "date-fns";
 
 export const postSlice = createSlice({
   name: "post",
@@ -7,11 +8,13 @@ export const postSlice = createSlice({
       id: "1",
       title: "Post 1",
       body: "This is the body of post 1",
+      date: sub(new Date(), { minutes: 10 }).toISOString(),
     },
     {
       id: "2",
       title: "Post 2",
       body: "This is the body of post 2",
+      date: sub(new Date(), { minutes: 5 }).toISOString(),
     },
   ],
   reducers: {
@@ -26,6 +29,7 @@ export const postSlice = createSlice({
             title,
             body,
             userId,
+            date: new Date().toISOString(),
           },
         };
       },
