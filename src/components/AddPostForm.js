@@ -4,16 +4,13 @@ import { postAdd } from "../store/slices/postSlice";
 import { selectAllUsers } from "../store/slices/userSlice";
 
 const AddPostForm = () => {
-
   const dispatch = useDispatch();
- 
+
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [userId, setUserId] = useState("");
 
   const users = useSelector(selectAllUsers);
-
-  console.log(users);
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onContentChanged = (e) => setContent(e.target.value);
@@ -30,7 +27,7 @@ const AddPostForm = () => {
 
   const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
 
-  const userOptions = users.map(user => (
+  const userOptions = users.map((user) => (
     <option key={user.id} value={user.id}>
       {user.name}
     </option>
@@ -54,9 +51,10 @@ const AddPostForm = () => {
         <select
           className="border p-2 rounded-md bg-red-400 hover:bg-red-500"
           id="postAuthor"
-          value="Select an author"
+          value={userId}
           onChange={onAuthorChanged}
         >
+          <option value="">Select author</option>
           {userOptions}
         </select>
         <label htmlFor="postContent">Content:</label>
@@ -67,7 +65,7 @@ const AddPostForm = () => {
           onChange={onContentChanged}
         />
         <button
-          className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-md"
+          className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-md disabled:bg-red-950"
           onClick={onSavePost}
           disabled={!canSave}
         >
