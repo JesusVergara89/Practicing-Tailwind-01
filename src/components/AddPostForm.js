@@ -1,26 +1,40 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { postAdd } from "../store/slices/postSlice";
+import { selectAllUsers } from "../store/slices/userSlice";
 
 const AddPostForm = () => {
+
+  const dispatch = useDispatch();
+ 
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [userId, setUserId] = useState("");
+
+  const users = useSelector(selectAllUsers);
+
+  console.log(users);
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onContentChanged = (e) => setContent(e.target.value);
-
-  const dispatch = useDispatch();
+  const onAuthorChanged = (e) => setUserId(e.target.value);
 
   const onSavePost = (e) => {
     e.preventDefault();
     if (title && content) {
-      dispatch(
-        postAdd(title, content)
-      );
+      dispatch(postAdd(title, content, userId));
       setTitle("");
       setContent("");
     }
   };
+
+  const canSave = Boolean(title) && Boolean(content) && Boolean(userId);
+
+  const userOptions = users.map(user => (
+    <option key={user.id} value={user.id}>
+      {user.name}
+    </option>
+  ));
 
   return (
     <section className="flex flex-col items-center justify-center mb-16 gap-4">
@@ -36,6 +50,15 @@ const AddPostForm = () => {
           value={title}
           onChange={onTitleChanged}
         />
+        <label htmlFor="postAuthor">Author:</label>
+        <select
+          className="border p-2 rounded-md bg-red-400 hover:bg-red-500"
+          id="postAuthor"
+          value="Select an author"
+          onChange={onAuthorChanged}
+        >
+          {userOptions}
+        </select>
         <label htmlFor="postContent">Content:</label>
         <textarea
           className="border p-2 rounded-md bg-red-400 hover:bg-red-500"
@@ -46,6 +69,7 @@ const AddPostForm = () => {
         <button
           className="bg-slate-800 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded-md"
           onClick={onSavePost}
+          disabled={!canSave}
         >
           Add post
         </button>
