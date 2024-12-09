@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { selectAllPost } from "../store/slices/postSlice";
 import AuthorPost from "./AuthorPost";
 import TimeAgo from "./TimeAgo";
+import ReactionBtn from './ReactionBtn'
 
 
 const PostList = () => {
@@ -17,6 +18,7 @@ const PostList = () => {
       <p className="text-slate-400 text-sm">{post.body.substring(0, 100)}</p>
       <AuthorPost userId={post.userId} />
       <TimeAgo timestamp={post.date} />
+      <ReactionBtn post={post} /> 
     </div>
   ));
 
