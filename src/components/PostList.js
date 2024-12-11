@@ -1,6 +1,6 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { selectAllPost } from "../store/slices/postSlice";
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { selectAllPost, getPostsStatus, getPostsError } from "../store/slices/postSlice";
 import AuthorPost from "./AuthorPost";
 import TimeAgo from "./TimeAgo";
 import ReactionBtn from './ReactionBtn'
