@@ -7,6 +7,6 @@ export default configureStore({
   reducer: {
     counterReducer,
     posts: postReducer,
-    userReducer,
+    users: userReducer,
   },
 });
