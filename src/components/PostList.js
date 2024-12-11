@@ -6,9 +6,7 @@ import {
   getPostsError,
   fetchPosts,
 } from "../store/slices/postSlice";
-import AuthorPost from "./AuthorPost";
-import TimeAgo from "./TimeAgo";
-import ReactionBtn from "./ReactionBtn";
+import PostExcerpt from "./PostExcerpt";
 
 const PostList = () => {
   const dispatch = useDispatch();
@@ -23,23 +21,24 @@ const PostList = () => {
     }
   }, [postStatus, dispatch]);
 
-  const renderedPosts = post.map((post) => (
-    <div
-      className="w-2/3  border p-2 rounded-md flex flex-col hover:bg-slate-700 hover:cursor-pointer"
-      key={post.id}
-    >
-      <h3 className="text-slate-400 text-xl font-bold">{post.title}</h3>
-      <p className="text-slate-400 text-sm">{post.body.substring(0, 100)}</p>
-      <AuthorPost userId={post.userId} />
-      <TimeAgo timestamp={post.date} />
-      <ReactionBtn post={post} />
-    </div>
-  ));
+  let content;
+  if (postStatus === "loading") {
+    content = <h2 className="text-slate-400 text-2xl font-bold">Loading...</h2>;
+  } else if (postStatus === "success") {
+    const renderedPosts = post.map((post) => (
+      <PostExcerpt key={post.id} post={post} />
+    ));
+    content = renderedPosts;
+  } else if (postStatus === "failed") {
+    content = (
+      <h2 className="text-slate-400 text-2xl font-bold">{postError}</h2>
+    );
+  }
 
   return (
     <section className="flex flex-col-reverse items-center justify-center mb-16 gap-4">
       <h2 className="text-slate-400 text-2xl font-bold">Posts</h2>
-      {renderedPosts}
+      {content}
     </section>
   );
 };
