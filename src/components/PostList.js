@@ -1,13 +1,27 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { selectAllPost, getPostsStatus, getPostsError } from "../store/slices/postSlice";
+import {
+  selectAllPost,
+  getPostsStatus,
+  getPostsError,
+  fetchPosts,
+} from "../store/slices/postSlice";
 import AuthorPost from "./AuthorPost";
 import TimeAgo from "./TimeAgo";
-import ReactionBtn from './ReactionBtn'
-
+import ReactionBtn from "./ReactionBtn";
 
 const PostList = () => {
+  const dispatch = useDispatch();
+
   const post = useSelector(selectAllPost);
+  const postStatus = useSelector(getPostsStatus);
+  const postError = useSelector(getPostsError);
+
+  useEffect(() => {
+    if (postStatus === "idle") {
+      dispatch(fetchPosts());
+    }
+  }, [postStatus, dispatch]);
 
   const renderedPosts = post.map((post) => (
     <div
@@ -18,7 +32,7 @@ const PostList = () => {
       <p className="text-slate-400 text-sm">{post.body.substring(0, 100)}</p>
       <AuthorPost userId={post.userId} />
       <TimeAgo timestamp={post.date} />
-      <ReactionBtn post={post} /> 
+      <ReactionBtn post={post} />
     </div>
   ));
 
