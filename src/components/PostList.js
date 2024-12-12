@@ -25,8 +25,8 @@ const PostList = () => {
   if (postStatus === "loading") {
     content = <h2 className="text-slate-400 text-2xl font-bold">Loading...</h2>;
   } else if (postStatus === "success") {
-    const renderedPosts = post.map((post) => (
-      <PostExcerpt key={post.id} post={post} />
+    const renderedPosts = post.map((post, index) => (
+      <PostExcerpt key={index} post={post} />
     ));
     content = renderedPosts;
   } else if (postStatus === "failed") {

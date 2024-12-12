@@ -15,7 +15,7 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
     const response = await axios.get(POST_URL);
     return [...response.data];
   } catch (error) {
-    throw new Error(error.message);
+    return error.message;
   }
 });
 
@@ -49,10 +49,10 @@ const postSlice = createSlice({
             date: new Date().toISOString(),
             reactions: {
               thumbsUp: 0,
-              hooray: 0,
+              wow: 0,
               heart: 0,
               rocket: 0,
-              eyes: 0,
+              coffee: 0,
             },
           },
         };
@@ -74,14 +74,14 @@ const postSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "success";
         let min = 1;
-        const loadedPosts = action.payload.map((post) => {
+        const loadedPosts = action.payload.map(post => {
           post.date = sub(new Date(), { minutes: min++ }).toISOString();
           post.reactions = {
             thumbsUp: 0,
-            hooray: 0,
+            wow: 0,
             heart: 0,
             rocket: 0,
-            eyes: 0,
+            coffee: 0,
           };
           return post;
         });
@@ -96,10 +96,10 @@ const postSlice = createSlice({
         action.payload.date = new Date().toISOString();
         action.payload.reactions = {
           thumbsUp: 0,
-          hooray: 0,
+          wow: 0,
           heart: 0,
           rocket: 0,
-          eyes: 0,
+          coffee: 0,
         };
         console.log(action.payload);
         state.posts.push(action.payload);
