@@ -11,23 +11,15 @@ const initialState = {
 };
 
 export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
-  try {
-    const response = await axios.get(POST_URL);
-    return [...response.data];
-  } catch (error) {
-    return error.message;
-  }
+  const response = await axios.get(POST_URL);
+  return response.data;
 });
 
 export const addNewPost = createAsyncThunk(
   "posts/addNewPost",
   async (initialPost) => {
-    try {
-      const response = await axios.post(POST_URL, initialPost);
-      return response.data;
-    } catch (error) {
-      return error.message;
-    }
+    const response = await axios.post(POST_URL, initialPost);
+    return response.data;
   }
 );
 
@@ -39,12 +31,12 @@ const postSlice = createSlice({
       reducer(state, action) {
         state.posts.push(action.payload);
       },
-      prepare(title, body, userId) {
+      prepare(title, content, userId) {
         return {
           payload: {
             id: nanoid(),
             title,
-            body,
+            content,
             userId,
             date: new Date().toISOString(),
             reactions: {
@@ -74,7 +66,7 @@ const postSlice = createSlice({
       .addCase(fetchPosts.fulfilled, (state, action) => {
         state.status = "success";
         let min = 1;
-        const loadedPosts = action.payload.map(post => {
+        const loadedPosts = action.payload.map((post) => {
           post.date = sub(new Date(), { minutes: min++ }).toISOString();
           post.reactions = {
             thumbsUp: 0,
